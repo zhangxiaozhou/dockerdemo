@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>dockerdemo</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <name>dockerdemo</name>
     <!-- FIXME change it to the project's website -->
@@ -39,10 +39,31 @@
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.13</version>
+
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <repository>${artifactId}</repository>
+                    <tag>${version}</tag>
+                </configuration>
             </plugin>
         </plugins>
     </build>
